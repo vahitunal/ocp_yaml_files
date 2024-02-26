@@ -1,0 +1,24 @@
+apiVersion: "logging.openshift.io/v1"
+kind: "ClusterLogging"
+metadata:
+  name: "instance"
+  namespace: "openshift-logging"
+spec:
+  managementState: "Managed"
+  collection:
+    logs:
+      type: "vector"
+      vector:
+        resources:
+          limits:
+            memory: 736Mi
+          requests:
+            cpu: 100m
+            memory: 736Mi
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          value: reserved
+        - effect: NoExecute
+          key: node-role.kubernetes.io/infra
+          value: reserved

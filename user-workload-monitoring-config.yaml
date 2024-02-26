@@ -1,0 +1,58 @@
+### STORAGE VE RETENTION MIKTARLARI ORTAMA GORE DEGISEBİLİR
+# PROD OTRAMDA 100Gi VE 10 GÜN RETENTİON UYGUN OLABİLİR.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-workload-monitoring-config
+  namespace: openshift-user-workload-monitoring
+data:
+  config.yaml: |
+    prometheus:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+      retention: 15d
+      resources:
+        requests:
+          cpu: 200m 
+          memory: 2Gi 
+      volumeClaimTemplate:
+        spec:
+          storageClassName: ocs-storagecluster-ceph-rbd
+          resources:
+            requests:
+              storage: 100Gi
+    thanosRuler:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+      retention: 15d
+      volumeClaimTemplate:
+        spec:
+          storageClassName: ocs-storagecluster-ceph-rbd
+          resources:
+            requests:
+              storage: 100Gi
+    prometheusOperator:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute

@@ -1,0 +1,115 @@
+### STORAGE VE RETENTION MIKTARLARI ORTAMA GORE DEGISEBİLİR
+# PROD OTRAMDA 100Gi VE 10 GÜN RETENTİON UYGUN OLABİLİR.
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cluster-monitoring-config
+  namespace: openshift-monitoring
+data:
+  config.yaml: |
+    enableUserWorkload: true
+    prometheusK8s:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+      retention: 15d
+      volumeClaimTemplate:
+        spec:
+          storageClassName: ocs-storagecluster-ceph-rbd
+          resources:
+            requests:
+              storage: 100Gi
+    alertmanagerMain:
+      nodeSelector: 
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+      volumeClaimTemplate:
+        spec:
+          storageClassName: ocs-storagecluster-ceph-rbd
+          resources:
+            requests:
+              storage: 100Gi
+    prometheusOperator:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    k8sPrometheusAdapter:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    kubeStateMetrics:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    telemeterClient:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    openshiftStateMetrics:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    thanosQuerier:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
+    monitoringPlugin:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: registry-storage-pvc
+ namespace: openshift-image-registry
+spec:
+ accessModes:
+ - ReadWriteMany
+ resources:
+   requests:
+     storage: 100Gi
+ storageClassName: ocs-storagecluster-ceph-nfs
+
+# oc apply -f image_registry_storage_pvc_ceph_nfs.yaml
+# oc get pvc -n openshift-image-registry
+# oc patch config.image/cluster -p '{"spec":{"managementState":"Managed","replicas":2,"storage":{"managementState":"Unmanaged","pvc":{"claim":"registry-storage-pvc"}}}}' --type=merge

@@ -1,0 +1,73 @@
+apiVersion: "logging.openshift.io/v1"
+kind: "ClusterLogging"
+metadata:
+  name: "instance"
+  namespace: "openshift-logging"
+spec:
+  managementState: "Managed"
+  logStore:
+    type: "elasticsearch"
+    retentionPolicy:
+      application:
+        maxAge: 10d
+      infra:
+        maxAge: 2d
+      audit:
+        maxAge: 2d
+    elasticsearch:
+      nodeCount: 3
+      resources:
+        limits:
+          memory: 16Gi
+        requests:
+          cpu: 500m
+          memory: 16Gi
+      storage:
+        storageClassName: "ocs-storagecluster-ceph-rbd"
+        size: "100G"
+      redundancyPolicy: "SingleRedundancy"
+      nodeSelector: 
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        value: reserved
+      - effect: NoExecute
+        key: node-role.kubernetes.io/infra
+        value: reserved
+  visualization:
+    type: "kibana"
+    kibana:
+      resources:
+        limits:
+          memory: 736Mi
+        requests:
+          cpu: 100m
+          memory: 736Mi
+      replicas: 1
+      nodeSelector: 
+        node-role.kubernetes.io/infra: ''
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/infra
+        value: reserved
+      - effect: NoExecute
+        key: node-role.kubernetes.io/infra
+        value: reserved
+  collection:
+    logs:
+      type: "vector"
+      vector:
+        resources:
+          limits:
+            memory: 736Mi
+          requests:
+            cpu: 100m
+            memory: 736Mi
+        tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/infra
+          value: reserved
+        - effect: NoExecute
+          key: node-role.kubernetes.io/infra
+          value: reserved
