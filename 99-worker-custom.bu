@@ -4,9 +4,6 @@ metadata:
   name: 99-worker-custom
   labels:
     machineconfiguration.openshift.io/role: worker
-openshift:
-  kernel_arguments:
-    - loglevel=7
 storage:
   files:
     - path: /etc/chrony.conf
