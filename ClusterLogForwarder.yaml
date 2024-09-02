@@ -16,7 +16,7 @@ spec:
         - audit
       outputRefs:
         - audit-syslog
-		    - default    //içeride de dursun istersek
+	- default    //içeride de dursun istersek
     - name: admin-logs
       inputRefs:
         - application
