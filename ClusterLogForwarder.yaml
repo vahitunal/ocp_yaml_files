@@ -1,0 +1,25 @@
+apiVersion: logging.openshift.io/v1
+kind: ClusterLogForwarder
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  outputs:
+    - name: audit-syslog
+      type: syslog
+      url: tcp://SYSLOG_IP:514
+      syslog:
+        msgID: audit
+  pipelines:
+    - name: audit-syslog
+      inputRefs:
+        - audit
+      outputRefs:
+        - audit-syslog
+		    - default    //içeride de dursun istersek
+    - name: admin-logs
+      inputRefs:
+        - application
+        - infrastructure
+      outputRefs:
+        - default
