@@ -11,7 +11,7 @@ spec:
       syslog:
         msgID: audit
   pipelines:
-    - name: audit-syslog
+    - name: audit-to-syslog
       inputRefs:
         - audit
       outputRefs:
