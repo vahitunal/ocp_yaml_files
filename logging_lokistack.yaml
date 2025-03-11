@@ -19,17 +19,17 @@ spec:
   limits:
     global:
       retention:
-        days: 7
+        days: 2
     tenants:
       application:
         retention:
-          days: 1
+          days: 2
       infrastructure:
         retention:
-          days: 5
+          days: 2
       audit:
         retention:
-          days: 5
+          days: 2
   template:
     compactor:
       nodeSelector:
