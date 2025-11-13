@@ -46,13 +46,4 @@ data:
           resources:
             requests:
               storage: 100Gi
-    prometheusOperator:
-      nodeSelector:
-        node-role.kubernetes.io/infra: ""
-      tolerations:
-      - key: node-role.kubernetes.io/infra
-        value: reserved
-        effect: NoSchedule
-      - key: node-role.kubernetes.io/infra
-        value: reserved
-        effect: NoExecute
+
