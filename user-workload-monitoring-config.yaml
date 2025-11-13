@@ -45,5 +45,5 @@ data:
           storageClassName: ocs-storagecluster-ceph-rbd
           resources:
             requests:
-              storage: 100Gi
+              storage: 20Gi
 
