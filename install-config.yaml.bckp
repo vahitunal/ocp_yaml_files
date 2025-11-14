@@ -3,7 +3,7 @@ baseDomain: ant.local
 proxy:
   httpProxy: http://PROXY_IP:3128
   httpsProxy: http://PROXY_IP:3128
-  noProxy: ant.local,sekom.local,172.25.0.0/16
+  noProxy: ant.local,172.25.0.0/16
 compute:
 - hyperthreading: Enabled
   name: worker
