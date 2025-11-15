@@ -1,5 +1,6 @@
 ### STORAGE VE RETENTION MIKTARLARI ORTAMA GORE DEGISEBİLİR
 # PROD OTRAMDA 100Gi VE 10 GÜN RETENTİON UYGUN OLABİLİR.
+## USER WORKLOADLARIN INFRALARA TAŞINMAMASI GEREKİYOR. (4.19 DOKÜMAN)
 
 apiVersion: v1
 kind: ConfigMap
@@ -9,15 +10,6 @@ metadata:
 data:
   config.yaml: |
     prometheus:
-      nodeSelector:
-        node-role.kubernetes.io/infra: ""
-      tolerations:
-      - key: node-role.kubernetes.io/infra
-        value: reserved
-        effect: NoSchedule
-      - key: node-role.kubernetes.io/infra
-        value: reserved
-        effect: NoExecute
       retention: 15d
       resources:
         requests:
@@ -30,15 +22,6 @@ data:
             requests:
               storage: 100Gi
     thanosRuler:
-      nodeSelector:
-        node-role.kubernetes.io/infra: ""
-      tolerations:
-      - key: node-role.kubernetes.io/infra
-        value: reserved
-        effect: NoSchedule
-      - key: node-role.kubernetes.io/infra
-        value: reserved
-        effect: NoExecute
       retention: 15d
       volumeClaimTemplate:
         spec:
