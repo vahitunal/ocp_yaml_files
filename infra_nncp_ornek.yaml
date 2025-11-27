@@ -1,0 +1,25 @@
+## infra node'lar için
+
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: vlan150-infra-1
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: infra-1-fqdn
+  maxUnavailable: 1
+  desiredState:
+    interfaces:
+      - name: ens35.150
+        description: "VLAN150 secondary IP"
+        type: vlan
+        state: up
+        vlan:
+          base-iface: ens35
+          id: 150
+        ipv4:
+          dhcp: false
+          enabled: true
+          address:
+            - ip: 10.150.0.11
+              prefix-length: 24
