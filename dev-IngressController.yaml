@@ -24,4 +24,4 @@ spec:
         operator: Exists
   namespaceSelector:
     matchLabels:
-      type: dev  ## ETIKETE DIKKAT
+      env: dev  ## ETIKETE DIKKAT
