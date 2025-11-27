@@ -1,0 +1,40 @@
+## NodeNetworkConfigurationPolicy örneğidir. eno3 ve eno4 portları için vlan150 ayarıdır. bilgiler uygun şekilde değiştirilebilir.
+
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: worker1-bond1-vlan150
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: worker1-fqdn
+  maxUnavailable: 1
+  desiredState:
+    interfaces:
+      - name: bond1
+        description: "LACP bond (ens3, ens4) for VLAN150 network"
+        type: bond
+        state: up
+        link-aggregation:
+          mode: 802.3ad
+          options:
+            miimon: "100"
+          port:
+            - ens3
+            - ens4
+
+      # VLAN 150 üstünde IP tanımı
+      - name: bond1.150
+        description: "VLAN 150 interface on bond1 for Test network"
+        type: vlan
+        state: up
+        vlan:
+          base-iface: bond1
+          id: 150
+        ipv4:
+          dhcp: false
+          enabled: true
+          address:
+            - ip: 10.0.150.21
+              prefix-length: 24
+        ipv6:
+          enabled: false
