@@ -11,7 +11,6 @@ spec:
   endpointPublishingStrategy:
     type: HostNetwork   # Orjinal ingresscontrollerdan teyid edilebilir.
     hostNetwork:
-      protocol: TCP
       httpPort: 8081
       httpsPort: 8443
       statsPort: 1937
