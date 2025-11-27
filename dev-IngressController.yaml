@@ -25,4 +25,4 @@ spec:
         operator: Exists
   namespaceSelector:
     matchLabels:
-      type: dev
+      type: dev  ## ETIKETE DIKKAT
