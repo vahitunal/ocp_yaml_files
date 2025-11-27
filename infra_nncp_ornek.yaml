@@ -1,4 +1,4 @@
-## infra node'lar için
+## infra node'lar için vlan örneği
 
 apiVersion: nmstate.io/v1
 kind: NodeNetworkConfigurationPolicy
