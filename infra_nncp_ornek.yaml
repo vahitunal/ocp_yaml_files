@@ -10,13 +10,10 @@ spec:
   maxUnavailable: 1
   desiredState:
     interfaces:
-      - name: ens35.150
+      - name: ens35
         description: "VLAN150 secondary IP"
-        type: vlan
+        type: ethernet
         state: up
-        vlan:
-          base-iface: ens35
-          id: 150
         ipv4:
           dhcp: false
           enabled: true
