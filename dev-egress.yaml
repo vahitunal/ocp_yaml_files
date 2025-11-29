@@ -1,0 +1,11 @@
+apiVersion: k8s.ovn.org/v1
+kind: EgressIP
+metadata:
+  name: dev-egress
+spec:
+  egressIPs:
+    - 10.0.150.101
+    - 10.0.150.102
+  namespaceSelector:
+    matchLabels:
+      env: test
