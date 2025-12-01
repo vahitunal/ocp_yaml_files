@@ -74,3 +74,17 @@ spec:
           dhcp: false
         ipv6:
           enabled: false
+	
+	# gateway tanımları
+    routes:
+      config:
+        - destination: 0.0.0.0/0
+          next-hop-address: 10.0.152.1
+          next-hop-interface: br-ex
+
+	# dns tanımları
+    dns-resolver:
+      config:
+        server:
+          - 10.0.10.10   # birincil dns
+          - 8.8.8.8      # ikincil dns
