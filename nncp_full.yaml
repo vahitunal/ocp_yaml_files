@@ -1,0 +1,76 @@
+## OPENSHIFT TUM YAPI NMSTATE KONFUGURASYONU
+## VLAN152 BR-EX, VLAN151 IKINCI IP
+
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
+metadata:
+  name: openshift-worker-1-full-network
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: openshift-worker-1.ocp.example.com
+  desiredState:
+    interfaces:
+      # fiziksel interface bilgileri
+      - name: eno1
+        type: ethernet
+        state: up
+      - name: eno2
+        type: ethernet
+        state: up
+      - name: eno3
+        type: ethernet
+        state: up
+      - name: eno4
+        type: ethernet
+        state: up
+
+      # bond0 bilgileri
+      - name: bond0
+        type: bond
+        state: up
+        link-aggregation:
+          mode: 802.3ad
+          options:
+            miimon: '100'
+          port:
+            - eno1
+            - eno2
+
+      # vlan 152 tanımı, br-ex kullanacağı için ip bilgisi olmamalı.
+      - name: bond0.152
+        type: vlan
+        state: up
+        vlan:
+          base-iface: bond0
+          id: 152
+
+
+      # vlan 151 tanımı
+      - name: bond0.151
+        type: vlan
+        state: up
+        vlan:
+          base-iface: bond0
+          id: 151
+        ipv4:
+          address:
+            - ip: 10.0.150.21
+              prefix-length: 24
+          dhcp: false
+        ipv6:
+          enabled: false
+
+      # br-ex bridge tanımları
+      - name: br-ex
+        type: ovs-bridge
+        state: up
+        bridge:
+          port:
+            - name: bond0.152
+        ipv4:
+          address:
+            - ip: 10.0.152.21
+              prefix-length: 23
+          dhcp: false
+        ipv6:
+          enabled: false
