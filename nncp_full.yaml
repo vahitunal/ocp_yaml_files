@@ -14,15 +14,34 @@ spec:
       - name: eno1
         type: ethernet
         state: up
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+
       - name: eno2
         type: ethernet
         state: up
-      - name: eno3
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+
+      - name: en03
         type: ethernet
         state: up
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
+
       - name: eno4
         type: ethernet
         state: up
+        ipv4:
+          enabled: false
+        ipv6:
+          enabled: false
 
       # bond0 bilgileri
       - name: bond0
