@@ -74,7 +74,7 @@ spec:
           dhcp: false
         ipv6:
           enabled: false
-	
+		  
 	# gateway tanımları
     routes:
       config:
