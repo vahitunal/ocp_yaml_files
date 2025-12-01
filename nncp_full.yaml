@@ -55,7 +55,7 @@ spec:
             - eno1
             - eno2
 
-      # vlan 152 tanımı, br-ex kullanacağı için ip bilgisi olmamalı.
+      # vlan 152 tanımı, br-ex kullanacağı için ip bilgisi olmamalı
       - name: bond0.152
         type: vlan
         state: up
