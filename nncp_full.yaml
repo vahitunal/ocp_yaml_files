@@ -82,7 +82,7 @@ spec:
           next-hop-address: 10.0.152.1
           next-hop-interface: br-ex
 
-	# dns tanımları
+    # dns tanımları
     dns-resolver:
       config:
         server:
