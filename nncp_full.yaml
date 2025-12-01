@@ -75,7 +75,7 @@ spec:
         ipv6:
           enabled: false
 
-	# gateway tanımları
+    # gateway tanımları
     routes:
       config:
         - destination: 0.0.0.0/0
